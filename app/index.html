@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111214">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Kilometer">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+  <title>Tesla Kilometer</title>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="eyebrow" id="today"></p>
+      <h1>Erlaubt bis heute</h1>
+      <p class="hero"><span id="allowed">–</span> <span class="unit">km</span></p>
+      <div class="progress" aria-hidden="true"><div id="time-bar"></div></div>
+      <p class="sub" id="lease-progress"></p>
+    </header>
+
+    <section class="card" id="status-card">
+      <div class="row-between">
+        <span class="lbl">Gefahren</span>
+        <span><b id="driven">–</b> km</span>
+      </div>
+      <div class="row-between">
+        <span class="lbl">Differenz zum Soll</span>
+        <span id="diff" class="diff">–</span>
+      </div>
+      <p class="hint" id="reading-date"></p>
+    </section>
+
+    <form class="card" id="reading-form">
+      <label for="odo">Aktueller Kilometerstand</label>
+      <div class="input-row">
+        <input id="odo" type="number" inputmode="numeric" min="0" step="1" placeholder="z. B. 2150" required>
+        <button type="submit" class="btn primary">Speichern</button>
+      </div>
+    </form>
+
+    <section class="card">
+      <h2>Prognose</h2>
+      <div class="row-between"><span class="lbl">Bei aktuellem Tempo zum Leasingende</span><b id="forecast">–</b></div>
+      <div class="row-between"><span class="lbl">Noch verfügbar pro Tag</span><b id="per-day">–</b></div>
+      <div class="row-between"><span class="lbl">Noch verfügbar gesamt</span><b id="remaining">–</b></div>
+    </section>
+
+    <section class="card">
+      <h2>Leasing</h2>
+      <div class="row-between"><span class="lbl">Zeitraum</span><span id="period">–</span></div>
+      <div class="row-between"><span class="lbl">Kontingent</span><span id="quota">–</span></div>
+      <div class="row-between"><span class="lbl">Soll pro Tag</span><span id="quota-day">–</span></div>
+    </section>
+
+    <section class="card">
+      <h2>Verlauf</h2>
+      <ul id="history" class="history"></ul>
+      <p id="history-empty" class="hint">Noch kein Kilometerstand erfasst.</p>
+    </section>
+
+    <details class="card">
+      <summary>Einstellungen</summary>
+      <form id="settings-form">
+        <label>Übergabedatum <input name="start" type="date" required></label>
+        <label>Laufzeit (Jahre) <input name="years" type="number" min="1" max="10" step="1" required></label>
+        <label>Kilometer pro Jahr <input name="kmPerYear" type="number" min="1000" step="500" required></label>
+        <label>Kilometerstand bei Übergabe <input name="startKm" type="number" min="0" step="1" required></label>
+        <button type="submit" class="btn primary">Übernehmen</button>
+      </form>
+      <div class="btn-col">
+        <button id="export" class="btn">Backup exportieren</button>
+        <label class="btn">Backup importieren
+          <input id="import" type="file" accept=".json,application/json" hidden>
+        </label>
+      </div>
+      <p class="hint">Alle Daten bleiben ausschließlich auf diesem iPhone.</p>
+    </details>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
